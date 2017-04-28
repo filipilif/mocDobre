@@ -1,0 +1,35 @@
+{block content} 
+	
+	<script src="js/sorttable.js"></script>
+	<div class="container">
+		<div class="sign_out"> <a n:href="Sign:out">Odhlásit se</a> </div> 
+		<h1>{block title}Seznam uživatelů{/block}</h1>
+		<table class="table sortable">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Jméno</th>
+				<th>Auto</th>
+				<th>Popis</th>
+				<th>Vytvořen</th>
+				<th>Upravit</th>
+				<th>Smazat</th>
+			</tr>
+		</thead>
+		<tbody>
+			{foreach $users as $a_user}
+			<tr>
+				<td>{$a_user->id}</td>
+				<td>{$a_user->name}</td>
+				<td>{$a_user->car}</td>
+				<td>{$a_user->description}</td>
+				<td>{$a_user->created->format('d.m.Y, H:i')}</td>
+				<td>{if $a_user->id !=15}<a n:href=":Edit $a_user->id">Upravit</a>{/if}</td>
+				<td>{if $a_user->id !=15}<a n:href=":Delete $a_user->id" onclick="return confirm ('Opravdu smazat?')">Smazat</a>{/if}</td>
+			</tr>
+			{/foreach}
+		</tbody>
+		</table>
+		<a n:href=":Add">Přidat nového uživatele</a>
+	</div>
+{/block}
